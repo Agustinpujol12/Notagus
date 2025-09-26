@@ -71,6 +71,12 @@ Esperar la indexación inicial.
 
 ---
 
+## ⬇️ Descarga
+
+- [APK más reciente (Releases)](../../releases)
+
+---
+
 ## 🖼️ Capturas de pantalla
 
 <p align="center">
