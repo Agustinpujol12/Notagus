@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/ic_launcher_foreground.webp" alt="Notagus logo" width="96" height="96"/>
+  <img src="docs/ic_launcher_round.webp" alt="Notagus logo" width="160"/>
 </p>
 
 <h1 align="center">Notagus</h1>
@@ -63,13 +63,13 @@ Esperar la indexación inicial.
 ## 🖼️ Capturas de pantalla
 
 <p align="center">
-  <img src="docs/home.jpeg" alt="Pantalla principal" width="250"/>
-  <img src="docs/calendar.jpeg" alt="Calendario" width="250"/>
-  <img src="docs/note.jpeg" alt="Notas" width="250"/>
+  <img src="docs/home.jpeg" alt="Pantalla principal" width="250" style="margin:15px"/>
+  <img src="docs/calendar.jpeg" alt="Calendario" width="250" style="margin:15px"/>
+  <img src="docs/note.jpeg" alt="Notas" width="250" style="margin:15px"/>
 </p>
 
 <p align="center">
-  <img src="docs/newtask.jpeg" alt="Nueva tarea" width="250"/>
-  <img src="docs/editnote.jpeg" alt="Editar nota" width="250"/>
-  <img src="docs/settings.jpeg" alt="Configuración" width="250"/>
+  <img src="docs/newtask.jpeg" alt="Nueva tarea" width="250" style="margin:15px"/>
+  <img src="docs/editnote.jpeg" alt="Editar nota" width="250" style="margin:15px"/>
+  <img src="docs/settings.jpeg" alt="Configuración" width="250" style="margin:15px"/>
 </p>
