@@ -9,6 +9,17 @@
   Proyecto nativo en <b>Java</b> con <b>Room (SQLite)</b>, <b>RecyclerView</b>, <b>Material Design</b> y <b>notificaciones</b>.
 </p>
 
+<p align="center">
+  <a href="https://github.com/Agustinpujol12/Notagus/releases">
+    <img src="https://img.shields.io/badge/Android-API%2024%2B-3DDC84" alt="Android API"/>
+  </a>
+  <img src="https://img.shields.io/badge/Made%20with-Java-orange" alt="Java"/>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License: MIT"/>
+  </a>
+  <img src="https://img.shields.io/github/last-commit/Agustinpujol12/Notagus" alt="Last commit"/>
+</p>
+
 ---
 
 ## ✨ Funcionalidades
@@ -73,3 +84,11 @@ Esperar la indexación inicial.
   <img src="docs/editnote.jpeg" alt="Editar nota" width="250" style="margin:15px"/>
   <img src="docs/settings.jpeg" alt="Configuración" width="250" style="margin:15px"/>
 </p>
+
+---
+
+## 🔒 Permisos & Privacidad
+
+- 🔔 **Notificaciones**: se utilizan únicamente para recordatorios de tareas.  
+- 💾 **Almacenamiento local**: todos los datos se guardan en el dispositivo mediante Room (SQLite).  
+- 🚫 **Sin conexión a servidores externos**: los datos son privados y permanecen solo en tu dispositivo.
