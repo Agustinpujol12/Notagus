@@ -1,57 +1,62 @@
-Notagus 📱
+<div align="center">
 
-Gestor personal de tareas, notas, listas y calendario para Android.
-Proyecto propio desarrollado en Android Studio con Java y Room Database, usado como herramienta diaria de organización.
+# Notagus 📱
 
----
+**Gestor personal de tareas, notas, listas y calendario para Android**  
+Proyecto propio en **Java + Room**, usado a diario como herramienta de organización.
 
-✨ Funcionalidades
+[![Made with Java](https://img.shields.io/badge/Made%20with-Java-orange.svg)](#)
+[![Android](https://img.shields.io/badge/Android-API%2024%2B-3DDC84.svg)](#)
+[![Gradle KTS](https://img.shields.io/badge/Build-Gradle%20KTS-02303A.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/Agustinpujol12/Notagus.svg)](#)
 
-✅ Tareas: crear, editar, fijar y completar; subtareas; recordatorios.
-
-📝 Notas: editor con título/cuerpo; pin/unpin.
-
-📅 Calendario: vista mensual con días resaltados; vínculo con tareas por fecha.
-
-📋 Listas: listas personalizadas con ítems chequeables.
-
-🎨 Temas: claro, oscuro y rosa; header y FAB adaptados.
-
-💾 Persistencia: Room + migraciones versionadas.
-
-📲 Widget: de tareas para the home screen.
+</div>
 
 ---
 
-🛠️ Tecnologías
+## ✨ Funcionalidades
 
-Lenguaje: Java (Android)
-
-SDK: compileSdk 36 · minSdk 24
-
-DB: Room (SQLite) · DAOs · Singleton de acceso
-
-UI: RecyclerView + Adapters · Material Components
-
-Build: Gradle (KTS)
-
-Notificaciones: NotificationManager + canales
+- ✅ **Tareas**: crear, editar, fijar, completar; subtareas; recordatorios.
+- 📝 **Notas**: editor con título y cuerpo; pin/unpin.
+- 📅 **Calendario**: vista mensual; tareas vinculadas por fecha.
+- 📋 **Listas**: listas personalizadas con ítems chequeables.
+- 🎨 **Temas**: claro, oscuro y rosa; header y FAB adaptados.
+- 💾 **Persistencia**: Room con migraciones versionadas.
+- 🧩 **Widget**: de tareas para la pantalla de inicio.
 
 ---
 
-🚀 Instalación
+## 🖼️ Capturas (opcional)
 
-Clonar el repositorio
+> Colocá tus imágenes en `docs/` y descomentá estas líneas.
 
-git clone https://github.com/Agustinpujol12/Notagus.git
+<!--
+<p align="center">
+  <img src="docs/screenshot_main.png" alt="Home" width="280"/>
+  <img src="docs/screenshot_tasks.png" alt="Tareas" width="280"/>
+  <img src="docs/screenshot_calendar.png" alt="Calendario" width="280"/>
+</p>
+-->
 
+---
 
-Abrir en Android Studio
-Esperar la indexación inicial.
+## 🛠️ Stack técnico
 
-Sincronizar dependencias con Gradle
-(Android Studio lo propone automáticamente).
+| Área | Tecnología |
+|---|---|
+| Lenguaje | **Java (Android)** |
+| SDK | `compileSdk = 36`, `minSdk = 24` |
+| Persistencia | **Room (SQLite)**, DAOs, **Singleton** de acceso |
+| UI | **RecyclerView + Adapters**, Material Components |
+| Notificaciones | NotificationManager + Channels |
+| Build | **Gradle (KTS)**, wrapper incluido |
 
-Ejecutar en un dispositivo o emulador con Android 7.0 (API 24) o superior.
+---
 
-Tip: No incluye claves ni local.properties. Asegurate de no versionar keystores ni archivos sensibles.
+## 🚀 Instalación
+
+1. **Clonar el repositorio**
+
+   ```bash
+   git clone https://github.com/Agustinpujol12/Notagus.git
