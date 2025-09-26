@@ -1,0 +1,46 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# Builds y llaves: NO subir
+/app/release-archives/
+/app/release/
+/app/build/
+/app/keystore/
+*.apk
+*.aab
+*.jks
+/keystore.properties
+# Android/Gradle
+/.gradle/
+/.idea/
+/local.properties
+/captures/
+/.gradle/
+/build/
+**/build/
+
+# App builds y llaves: NO subir
+/app/build/
+/app/release/
+/app/release-archives/
+/app/keystore/
+*.apk
+*.aab
+*.jks
+/keystore.properties
+
+# Otros típicos
+*.iml
+.DS_Store
