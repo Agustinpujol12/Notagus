@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.png" alt="Notagus logo" width="96" height="96"/>
+  <img src="docs/ic_launcher_foreground.webp" alt="Notagus logo" width="96" height="96"/>
 </p>
 
 <h1 align="center">Notagus</h1>
@@ -47,11 +47,29 @@
 
 ## 🚀 Instalación
 
-1. Clonar el repositorio
-git clone https://github.com/Agustinpujol12/Notagus.git
-2. Abrir en Android Studio
-Esperar la indexación inicial.
-3. Sincronizar dependencias con Gradle
-(Android Studio lo propone automáticamente).
-4. Ejecutar en un dispositivo o emulador con Android 7.0 (API 24) o superior.
+1. Clonar el repositorio  
+git clone https://github.com/Agustinpujol12/Notagus.git  
 
+2. Abrir en Android Studio  
+Esperar la indexación inicial.  
+
+3. Sincronizar dependencias con Gradle  
+(Android Studio lo propone automáticamente).  
+
+4. Ejecutar en un dispositivo o emulador con Android 7.0 (API 24) o superior.  
+
+---
+
+## 🖼️ Capturas de pantalla
+
+<p align="center">
+  <img src="docs/home.jpeg" alt="Pantalla principal" width="250"/>
+  <img src="docs/calendar.jpeg" alt="Calendario" width="250"/>
+  <img src="docs/note.jpeg" alt="Notas" width="250"/>
+</p>
+
+<p align="center">
+  <img src="docs/newtask.jpeg" alt="Nueva tarea" width="250"/>
+  <img src="docs/editnote.jpeg" alt="Editar nota" width="250"/>
+  <img src="docs/settings.jpeg" alt="Configuración" width="250"/>
+</p>
