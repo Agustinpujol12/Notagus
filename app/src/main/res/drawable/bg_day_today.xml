@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <!-- Usa tu rosa claro del header si querés -->
+    <solid android:color="#F3C9D6"/>
+</shape>

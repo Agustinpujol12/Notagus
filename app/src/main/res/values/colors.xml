@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values/colors.xml -->
+<resources>
+    <!-- Fondo general -->
+    <color name="fondo_general">#FAE9D2</color>
+
+    <!-- Header -->
+    <color name="fondo_header">#F4A950</color>
+
+    <!-- Texto principal -->
+    <color name="texto_principal">#A45B1E</color>
+    <!-- Colores para el dialog flotante de crear tarea -->
+    <color name="ok_green">#2E7D32</color>
+    <color name="close_neutral">#9E9E9E</color>
+    <!-- Colores para el icono de la x del dialog -->
+    <color name="icon_close_color">#20150A</color>
+    <!-- Color para la division de las tareas-->
+    <color name="linea_divisor">#62000000</color> <!-- gris claro -->
+    <!-- Colores del menu contextual, popup-->
+    <color name="menu_text">#222222</color>
+    <color name="menu_icon">#606368</color>
+    <color name="menu_divider">#1F000000</color>  <!-- gris muy suave -->
+    <color name="delete_red">#E53935</color>      <!-- rojo estilo Material -->
+    <color name="text_on_content">#000000</color> <!-- values/ -->
+    <color name="font_swatch_bg">#F4E4C8</color>        <!-- “cremita” suave -->
+    <color name="swatch_stroke">#3A3F47</color>         <!-- borde sutil en dark -->
+    <color name="brand_accent">#F4A950</color>          <!-- naranja de marca (seleccionado) -->
+    <color name="swatch_ripple">#1FFFFFFF</color>       <!-- ripple suave en dark (blanco 12%) -->
+    <color name="delete_red_soft">#E57373</color> <!-- rojo 300, más suave -->
+
+
+</resources>

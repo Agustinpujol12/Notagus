@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/editorRootCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editorRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Título -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/titulo"
+                android:textSize="22sp"
+                android:maxLines="1"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Cuerpo: se estira entre el título y la barra -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBody"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tilTitle"
+            app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0"
+        app:layout_goneMarginBottom="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/texto"
+                android:gravity="top"
+                android:inputType="textMultiLine|textCapSentences"
+                android:imeOptions="actionDone"
+                android:overScrollMode="always"
+                android:minLines="8"
+                android:maxLines="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Barra inferior (sube con el teclado) -->
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnClose"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/cerrar"
+                android:src="@drawable/ic_close_24"
+                app:tint="@color/menu_text" />
+
+            <ImageButton
+                android:id="@+id/btnSave"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="40dp"
+                android:contentDescription="@string/guardar"
+                android:src="@drawable/ic_check_24"
+                app:tint="@color/menu_text" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

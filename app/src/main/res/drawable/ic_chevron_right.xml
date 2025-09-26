@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- línea horizontal -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="@android:color/black"
+        android:pathData="M4,12H20" />
+
+    <!-- cabeza flecha -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="@android:color/black"
+        android:pathData="M14,6L20,12L14,18" />
+</vector>

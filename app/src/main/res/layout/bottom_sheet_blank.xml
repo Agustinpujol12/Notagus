@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:minHeight="180dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_popup_menu">
+
+    <!-- Zona superior de acciones -->
+    <LinearLayout
+        android:id="@+id/itemEdit"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_edit_24"
+            android:tint="@color/menu_icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight
+                ="1"
+            android:layout_marginStart="16dp"
+            android:text="Editar nombre"
+            android:textSize="18sp"
+            android:textColor="@color/menu_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/itemPinTask"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_pin"
+            android:tint="@color/menu_icon" />
+
+        <TextView
+            android:id="@+id/tvPinLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Fijar tarea"
+            android:textSize="18sp"
+            android:textColor="@color/menu_text" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/itemAddSubtask"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_add_24"
+            android:tint="@color/menu_icon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Agregar subtarea"
+            android:textSize="18sp"
+            android:textColor="@color/menu_text"/>
+    </LinearLayout>
+
+    <!-- Divisor -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/menu_divider" />
+
+    <!-- Accion de peligro -->
+    <LinearLayout
+        android:id="@+id/itemDelete"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_delete_24"
+            android:tint="@color/delete_red"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Eliminar"
+            android:textSize="18sp"
+            android:textColor="@color/delete_red"/>
+    </LinearLayout>
+
+</LinearLayout>

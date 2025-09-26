@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootCoordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:windowSoftInputMode="adjustResize">
+
+    <!-- Columna principal -->
+    <LinearLayout
+        android:id="@+id/rootColumn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="152dp"
+            android:background="@color/fondo_header"
+            android:paddingBottom="8dp"
+            android:elevation="8dp"
+            android:translationZ="8dp">
+
+            <!-- Botón Ajustes -->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/menu_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_settings" />
+
+            <!-- Flecha AYER -->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnAyer"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ayer"
+                android:tint="@color/menu_text"
+                app:srcCompat="@drawable/ic_chevron_left"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="28dp" />
+
+            <!-- Fecha centrada -->
+            <TextView
+                android:id="@+id/tvFecha"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:minLines="2"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2dp"
+                android:textAlignment="center"
+                android:textColor="#222222"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/btnAyer"
+                app:layout_constraintEnd_toStartOf="@id/btnManana"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constrainedWidth="true"
+                tools:text="Martes\n9 de septiembre" />
+
+            <!-- Flecha MAÑANA -->
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnManana"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/manana"
+                android:tint="@color/menu_text"
+                app:srcCompat="@drawable/ic_chevron_right"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="28dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- CONTENIDO -->
+        <LinearLayout
+            android:id="@+id/contentArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fondo_general"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/emptyStateContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/emptyTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
+                    android:text="No tienes tareas aún"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/emptySubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:text="Toca el lápiz para agregar tu primera tarea"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/emptyExampleCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#F5F5F5"
+                    android:elevation="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/emptyExampleTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:text="Ejemplo: Mi primera tarea"
+                        android:textColor="#444444"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/emptyExampleSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="• Subtarea de ejemplo"
+                        android:textColor="#777777"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Recycler -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTasks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="16dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Fragment host (Calendario) -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentHost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:name="com.agustinpujol.notagus.calendar.CalendarFragment" />
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregar"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/bottomNav"
+        app:layout_anchorGravity="top|end"
+        android:translationX="-6dp"
+        android:translationY="20dp"
+        android:src="@drawable/ic_create"
+        app:backgroundTint="@color/fondo_header"
+        app:tint="@android:color/white"
+        app:useCompatPadding="true"
+        app:fabCustomSize="62dp"
+        app:maxImageSize="32dp"
+        android:elevation="8dp"
+        android:contentDescription="Agregar" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+    android:layout_gravity="bottom"
+    android:background="?attr/colorSurface"
+    app:layout_insetEdge="bottom"
+    app:menu="@menu/menu_bottom_nav"
+    app:labelVisibilityMode="labeled"
+    app:itemIconSize="24dp"
+    app:itemRippleColor="@null"
+    app:itemBackground="@drawable/bnv_ripple_masked"
+    app:itemActiveIndicatorStyle="@style/BottomNav_NoActiveIndicator" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

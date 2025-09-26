@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Texto/íconos sobre superficies oscuras -->
+    <!-- Divider claro en oscuro (~13% opacidad) -->
+    <color name="linea_divisor">#62000000</color>
+    <color name="text_on_content">#FFFFFF</color> <!-- values-night/ -->
+</resources>

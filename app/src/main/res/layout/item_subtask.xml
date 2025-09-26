@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp">
+
+    <!-- Checkbox -->
+    <CheckBox
+        android:id="@+id/cbSubDone"
+        android:textColor="@color/text_on_content"
+        android:layout_width="22dp"
+        android:layout_height="22dp" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:text="Subtarea"
+        android:textColor="@color/text_on_content"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <!-- Eliminar -->
+    <ImageButton
+        android:id="@+id/btnSubDelete"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Borrar"
+        android:src="@android:drawable/ic_menu_delete"
+        android:textColor="?attr/colorOnSurface"/>
+
+</LinearLayout>

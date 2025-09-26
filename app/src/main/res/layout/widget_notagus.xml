@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="6dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_widget_card"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/headerRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_header"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lunes 22 de septiembre"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <ImageView
+                android:id="@+id/btnRefresh"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:background="@drawable/selector_refresh"
+                android:src="@drawable/ic_refresh_24"
+                android:contentDescription="@string/app_name"
+                android:clickable="true"
+                android:focusable="true"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/contentBox"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="10dp">
+
+        <!-- Lista ocupa todo el alto fijo -->
+        <ListView
+            android:id="@+id/listTasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp"
+            android:clipToPadding="false" />
+
+        <!-- Vista vacía superpuesta, también ocupa todo y queda centrada -->
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="No hay tareas para hoy"
+            android:textColor="#8A000000"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

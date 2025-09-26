@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Notagus</string>
+    <string name="new_task_title">Nueva tarea</string>
+    <string name="close">Cerrar</string>
+    <string name="new_task_label">Coloca el nombre de tu nueva tarea:</string>
+    <string name="new_task_duration">Duracion de la tarea:</string>
+    <string name="name_hint">Nombre</string>
+    <string name="confirm">Confirmar</string>
+    <string name="name_required">Escribe un nombre</string>
+    <string name="more_options">Más opciones</string>
+    <string name="expandir">Expandir</string>
+    <string name="pinned_marker">Tarea fijada</string>
+
+    <!-- Navegación -->
+    <string name="nav_tareas">Tareas</string>
+    <string name="nav_calendar">Calendario</string>
+    <string name="nav_notas">Notas</string>
+
+    <!-- FABs -->
+    <string name="add_in_notas">Agregar en notas</string>
+    <string name="add_in_calendar">Agregar en calendario</string>
+
+    <!-- Header calendario -->
+    <string name="ayer">Ayer</string>
+    <string name="manana">Mañana</string>
+
+    <!-- Abreviaturas días -->
+    <string name="dom_corto">DO</string>
+    <string name="lun_corto">LU</string>
+    <string name="mar_corto">MA</string>
+    <string name="mie_corto">MI</string>
+    <string name="jue_corto">JU</string>
+    <string name="vie_corto">VI</string>
+    <string name="sab_corto">SA</string>
+    <string name="previous">Mes anterior</string>
+    <string name="next">Mes siguiente</string>
+
+    <!-- Nota editor -->
+    <string name="cerrar">Cerrar</string>
+    <string name="guardar">Guardar</string>
+    <string name="titulo">Título</string>
+    <string name="texto">Texto</string>
+    <string name="campo_obligatorio">Campo obligatorio</string>
+    <string name="agregar_nueva_nota">Agregar nueva nota</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="requerido">Requerido</string>
+
+
+</resources>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notasRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context=".NotasFragment">
+
+    <!-- HEADER -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="152dp"
+        android:background="@color/fondo_header"
+        android:paddingBottom="8dp"
+        android:elevation="8dp"
+        android:translationZ="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="4dp"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/menu_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_settings" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnAyer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/ayer"
+            android:tint="@color/menu_text"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="28dp"/>
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:minLines="2"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="2dp"
+            android:textAlignment="center"
+            android:textColor="#222222"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/btnAyer"
+            app:layout_constraintEnd_toStartOf="@id/btnManana"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constrainedWidth="true"
+            tools:text="Martes\n9 de septiembre"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnManana"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/manana"
+            android:tint="@color/menu_text"
+            app:srcCompat="@drawable/ic_chevron_right"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="28dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- CONTENIDO (host de RV y del editor) -->
+    <FrameLayout
+        android:id="@+id/notasContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="152dp"
+        android:clipToPadding="false"
+        app:layout_dodgeInsetEdges="bottom">
+
+        <!-- Lista de tarjetas de notas (2 columnas) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNotas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:clipToPadding="false"/>
+
+        <!-- Target de eliminación centrado (el círculo y tint se aplican por código) -->
+        <FrameLayout
+            android:id="@+id/trashTarget"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_trash_circle"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivTrash"
+            android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_trash_outline_28"
+        android:contentDescription="@string/eliminar"/>
+    </FrameLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

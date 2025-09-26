@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <!-- Fondo rectangular con esquinas redondeadas -->
+    <path
+        android:fillColor="#FAE9D2"
+        android:pathData="M64,96
+                          h384
+                          a32,32 0 0 1 32,32
+                          v256
+                          a32,32 0 0 1 -32,32
+                          h-384
+                          a32,32 0 0 1 -32,-32
+                          v-256
+                          a32,32 0 0 1 32,-32z"/>
+
+    <!-- Encabezado -->
+    <path
+        android:fillColor="#F4A950"
+        android:pathData="M64,96 h384 v64 h-384z"/>
+
+    <!-- Texto simulado como líneas -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="8"
+        android:pathData="M96,192 h320"/>
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="8"
+        android:pathData="M96,240 h320"/>
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="8"
+        android:pathData="M96,288 h240"/>
+</vector>

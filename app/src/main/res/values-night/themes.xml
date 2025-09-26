@@ -1,0 +1,24 @@
+<resources>
+    <style name="Base.Theme.Notagus" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/fondo_header</item>
+        <item name="colorSurface">@color/fondo_general</item>
+        <item name="android:colorBackground">@color/fondo_general</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorError">@color/delete_red</item>
+        <item name="colorOnError">@android:color/white</item>
+    </style>
+
+    <style name="Theme.Notagus.FontA" parent="Base.Theme.Notagus">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="Theme.Notagus.FontB" parent="Base.Theme.Notagus">
+        <item name="android:fontFamily">@font/playfairdisplay_regular</item>
+    </style>
+
+    <style name="Theme.Notagus.FontC" parent="Base.Theme.Notagus">
+        <item name="android:fontFamily">@font/dancingscript_regular</item>
+    </style>
+
+    <style name="Theme.Notagus" parent="Theme.Notagus.FontA"/>
+</resources>

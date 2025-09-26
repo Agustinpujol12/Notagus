@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_tareas"
+            android:icon="@drawable/ic_tareas_state"
+            android:title="@string/nav_tareas"
+            android:checkable="true" />
+
+        <item
+            android:id="@+id/nav_notas"
+            android:icon="@drawable/ic_notas_state"
+            android:title="@string/nav_notas"
+            android:checkable="true" />
+
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_calendar_state"
+            android:title="@string/nav_calendar"
+            android:checkable="true" />
+
+    </group>
+</menu>
