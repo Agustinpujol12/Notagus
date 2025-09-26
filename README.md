@@ -91,4 +91,4 @@ Esperar la indexación inicial.
 
 - 🔔 **Notificaciones**: se utilizan únicamente para recordatorios de tareas.  
 - 💾 **Almacenamiento local**: todos los datos se guardan en el dispositivo mediante Room (SQLite).  
-- 🚫 **Sin conexión a servidores externos**: los datos son privados y permanecen solo en tu dispositivo.
+- 🚫 **Sin conexión a servidores externos**: los datos son privados y permanecen solo en tu dispositivo.  
