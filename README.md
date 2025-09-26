@@ -1,17 +1,13 @@
-<div align="center">
+<p align="center">
+  <img src="docs/logo.png" alt="Notagus logo" width="96" height="96"/>
+</p>
 
-# Notagus 📱
+<h1 align="center">Notagus</h1>
 
-**Gestor personal de tareas, notas, listas y calendario para Android**  
-Proyecto propio en **Java + Room**, usado a diario como herramienta de organización.
-
-[![Made with Java](https://img.shields.io/badge/Made%20with-Java-orange.svg)](#)
-[![Android](https://img.shields.io/badge/Android-API%2024%2B-3DDC84.svg)](#)
-[![Gradle KTS](https://img.shields.io/badge/Build-Gradle%20KTS-02303A.svg)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/Agustinpujol12/Notagus.svg)](#)
-
-</div>
+<p align="center">
+  Gestor personal de <b>tareas, notas, listas y calendario</b> para Android.<br/>
+  Proyecto nativo en <b>Java</b> con <b>Room (SQLite)</b>, <b>RecyclerView</b>, <b>Material Design</b> y <b>notificaciones</b>.
+</p>
 
 ---
 
@@ -27,36 +23,35 @@ Proyecto propio en **Java + Room**, usado a diario como herramienta de organizac
 
 ---
 
-## 🖼️ Capturas (opcional)
+## 🧰 Herramientas y stack (nivel “complejo”)
 
-> Colocá tus imágenes en `docs/` y descomentá estas líneas.
-
-<!--
-<p align="center">
-  <img src="docs/screenshot_main.png" alt="Home" width="280"/>
-  <img src="docs/screenshot_tasks.png" alt="Tareas" width="280"/>
-  <img src="docs/screenshot_calendar.png" alt="Calendario" width="280"/>
-</p>
--->
-
----
-
-## 🛠️ Stack técnico
-
-| Área | Tecnología |
-|---|---|
-| Lenguaje | **Java (Android)** |
-| SDK | `compileSdk = 36`, `minSdk = 24` |
-| Persistencia | **Room (SQLite)**, DAOs, **Singleton** de acceso |
-| UI | **RecyclerView + Adapters**, Material Components |
-| Notificaciones | NotificationManager + Channels |
-| Build | **Gradle (KTS)**, wrapper incluido |
+- **Lenguaje / Plataforma**
+  - Java (Android), Android SDK (`compileSdk = 36`, `minSdk = 24`)
+- **Arquitectura y Persistencia**
+  - Room (SQLite) con DAOs, entidades y migraciones
+  - `DatabaseClient` como **Singleton** de acceso a `AppDatabase`
+- **UI / UX**
+  - RecyclerView + ViewHolders/Adapters
+  - Fragments (Tasks, Notes, Calendar)
+  - Material Components (temas: claro/oscuro/rosa), FAB, BottomNav
+- **Notificaciones / Sistema**
+  - NotificationManager + canales; compatibilidad API 24+
+  - App Widget de tareas (provider + views + actualizaciones)
+- **Build / Tooling**
+  - Gradle (KTS), wrapper incluido
+  - `.gitignore` para Android/Gradle
+- **Pruebas**
+  - `test/` (unit) y `androidTest/` (instrumentadas)
 
 ---
 
 ## 🚀 Instalación
 
-1. **Clonar el repositorio**
+1. Clonar el repositorio
+git clone https://github.com/Agustinpujol12/Notagus.git
+2. Abrir en Android Studio
+Esperar la indexación inicial.
+3. Sincronizar dependencias con Gradle
+(Android Studio lo propone automáticamente).
+4. Ejecutar en un dispositivo o emulador con Android 7.0 (API 24) o superior.
 
-   ```bash
-   git clone https://github.com/Agustinpujol12/Notagus.git
