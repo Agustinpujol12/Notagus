@@ -153,7 +153,10 @@ public class NewTaskDialog extends DialogFragment {
             Window w = dialog.getWindow();
 
             // 👉 Fuerza el estado del teclado visible al abrir
-            w.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            w.setSoftInputMode(
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+                            | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING
+            );
 
             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
             lp.copyFrom(w.getAttributes());
