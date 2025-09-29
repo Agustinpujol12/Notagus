@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agustinpujol.notagus.calendar.CalendarFragment;
+import com.agustinpujol.notagus.widget.NotagusWidgetProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -35,8 +36,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import com.agustinpujol.notagus.widget.NotagusWidgetProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,12 +64,32 @@ public class MainActivity extends AppCompatActivity {
     private AppDatabase db;
     private ExecutorService dbExecutor;
 
+    // --- ItemDecoration: espacio solo bajo el último ítem ---
+    static final class LastItemBottomOffset extends RecyclerView.ItemDecoration {
+        private int bottomPx;
+        LastItemBottomOffset(int px) { bottomPx = px; }
+        void setBottomPx(int px) { bottomPx = px; }
+
+        @Override
+        public void getItemOffsets(@NonNull android.graphics.Rect outRect,
+                                   @NonNull View view,
+                                   @NonNull RecyclerView parent,
+                                   @NonNull RecyclerView.State state) {
+            RecyclerView.Adapter<?> ad = parent.getAdapter();
+            if (ad == null) return;
+            int pos = parent.getChildAdapterPosition(view);
+            if (pos == RecyclerView.NO_POSITION) return;
+            if (pos == ad.getItemCount() - 1) {
+                outRect.bottom += bottomPx; // solo al ÚLTIMO
+            }
+        }
+    }
+
     private void applyEdgeToEdge() {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat wic =
                 new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
-        wic.setSystemBarsBehavior(
-                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+        wic.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
     }
 
     private void applyFontThemeFromSettings() {
@@ -130,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int textOnHeader = ColorUtils.calculateLuminance(cols.header) < 0.5 ? 0xFFFFFFFF : 0xFF000000;
-        tvFecha    = findViewById(R.id.tvFecha);
-        btnAyer    = findViewById(R.id.btnAyer);
-        btnManana  = findViewById(R.id.btnManana);
-        btnSettings= findViewById(R.id.btnSettings);
+        tvFecha     = findViewById(R.id.tvFecha);
+        btnAyer     = findViewById(R.id.btnAyer);
+        btnManana   = findViewById(R.id.btnManana);
+        btnSettings = findViewById(R.id.btnSettings);
 
         if (tvFecha != null) tvFecha.setTextColor(textOnHeader);
         if (btnAyer   != null) btnAyer.setImageTintList(android.content.res.ColorStateList.valueOf(textOnHeader));
@@ -172,23 +191,15 @@ public class MainActivity extends AppCompatActivity {
         if (d != null) divider.setDrawable(d);
         recyclerViewTasks.addItemDecoration(divider);
 
-        ViewCompat.setOnApplyWindowInsetsListener(recyclerViewTasks, (v, insets) -> {
-            int imeBottom  = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-            int sysBottom  = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
-            int insetBottom = Math.max(imeBottom, sysBottom);
+        // ===== ItemDecoration para espacio del último ítem (sin “saltos”) =====
+        final LastItemBottomOffset bottomOffset = new LastItemBottomOffset(dp(56));
+        recyclerViewTasks.addItemDecoration(bottomOffset);
 
-            int bnvH = (bottomNav != null) ? bottomNav.getHeight() : 0;
-            int fabH = (fab != null && fab.getMeasuredHeight() > 0) ? fab.getMeasuredHeight() : dp(62);
-            int fabMb = dp(1);
-            int breath = dp(1);
-            int extraBottom = bnvH + fabH + fabMb + breath;
-
-            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(),
-                    insetBottom + extraBottom);
-            return insets;
-        });
-        recyclerViewTasks.post(this::updateRecyclerBottomPadding);
-        bottomNav.post(this::updateRecyclerBottomPadding);
+        // Recalcular una vez medidos FAB/BNV y ante futuros relayouts
+        View.OnLayoutChangeListener recalc = (v, a,b,c,d2, e,f,g,h) -> recomputeBottomSpace(bottomOffset);
+        if (bottomNav != null) bottomNav.addOnLayoutChangeListener(recalc);
+        if (fab != null)       fab.addOnLayoutChangeListener(recalc);
+        recyclerViewTasks.post(() -> recomputeBottomSpace(bottomOffset));
 
         adapter = new TaskAdapter(
                 tasks,
@@ -210,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewTasks.setAdapter(adapter);
         adapter.attachRecyclerView(recyclerViewTasks);
 
-        // ➕ Proveer el dayKey actual al adapter para las permanentes tildadas
+        // Proveer dayKey al adapter
         adapter.setDayKeyProvider(() -> (selectedDate != null) ? dateToDayKey(selectedDate) : null);
 
         dbExecutor = Executors.newSingleThreadExecutor();
@@ -226,12 +237,12 @@ public class MainActivity extends AppCompatActivity {
             fab.setImageTintList(android.content.res.ColorStateList.valueOf(fabIcon));
 
             ViewCompat.setOnApplyWindowInsetsListener(fab, (v, insets) -> {
-                int bottomInset = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
+                int nav = insets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.navigationBars()).bottom;
                 ViewGroup.LayoutParams base = v.getLayoutParams();
                 if (!(base instanceof ViewGroup.MarginLayoutParams)) return insets;
                 ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) base;
                 int baseMarginPx = dp(16);
-                lp.bottomMargin = baseMarginPx + bottomInset;
+                lp.bottomMargin = baseMarginPx + nav;
                 lp.rightMargin  = baseMarginPx;
                 v.setLayoutParams(lp);
                 return insets;
@@ -407,11 +418,7 @@ public class MainActivity extends AppCompatActivity {
         // ===== Back =====
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() {
-                // 1) Primero dejamos que el adapter consuma el back (edición o subtareas abiertas)
-                if (adapter != null && adapter.handleBack()) {
-                    return;
-                }
-                // 2) Si no lo consumió, comportamiento previo
+                if (adapter != null && adapter.handleBack()) return;
                 if (adapter != null && adapter.isEditing()) {
                     adapter.commitActiveEdit();
                     return;
@@ -429,10 +436,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 33) {
             if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
                     != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(
-                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
-                        REQ_POST_NOTIF
-                );
+                requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, REQ_POST_NOTIF);
             }
         }
     }
@@ -442,7 +446,6 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // opcional: manejar tus permisos acá
     }
 
     @Override
@@ -580,9 +583,29 @@ public class MainActivity extends AppCompatActivity {
         if (bnv != null) bnv.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    private void updateRecyclerBottomPadding() {
-        if (recyclerViewTasks == null) return;
-        WindowInsetsCompat rootInsets = ViewCompat.getRootWindowInsets(recyclerViewTasks);
-        if (rootInsets != null) ViewCompat.dispatchApplyWindowInsets(recyclerViewTasks, rootInsets);
+    // Recalcula el espacio seguro del último ítem (BNV/FAB + insets + padding base)
+    private void recomputeBottomSpace(LastItemBottomOffset deco) {
+        int basePad = dp(36);
+
+        int bnvH = (bottomNav != null) ? bottomNav.getHeight() : 0;
+
+        int fabH = (fab != null && fab.getHeight() > 0) ? fab.getHeight() : dp(62);
+        int fabRad = fabH / 2;
+
+        int fabMb = dp(16);
+        if (fab != null && fab.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            fabMb = ((ViewGroup.MarginLayoutParams) fab.getLayoutParams()).bottomMargin;
+        }
+        int fabOverlap = fabRad + fabMb;
+
+        int extra = Math.max(bnvH, fabOverlap);
+
+        int nav = 0;
+        WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(recyclerViewTasks);
+        if (insets != null) {
+            nav = insets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.navigationBars()).bottom;
+        }
+        deco.setBottomPx(basePad + nav + extra);
+        recyclerViewTasks.invalidateItemDecorations();
     }
 }
