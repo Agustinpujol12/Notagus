@@ -64,26 +64,8 @@ public class MainActivity extends AppCompatActivity {
     private AppDatabase db;
     private ExecutorService dbExecutor;
 
-    // --- ItemDecoration: espacio solo bajo el último ítem ---
-    static final class LastItemBottomOffset extends RecyclerView.ItemDecoration {
-        private int bottomPx;
-        LastItemBottomOffset(int px) { bottomPx = px; }
-        void setBottomPx(int px) { bottomPx = px; }
-
-        @Override
-        public void getItemOffsets(@NonNull android.graphics.Rect outRect,
-                                   @NonNull View view,
-                                   @NonNull RecyclerView parent,
-                                   @NonNull RecyclerView.State state) {
-            RecyclerView.Adapter<?> ad = parent.getAdapter();
-            if (ad == null) return;
-            int pos = parent.getChildAdapterPosition(view);
-            if (pos == RecyclerView.NO_POSITION) return;
-            if (pos == ad.getItemCount() - 1) {
-                outRect.bottom += bottomPx; // solo al ÚLTIMO
-            }
-        }
-    }
+    // Padding original del RV para empujar con IME
+    private int rvBottomPaddingInitial = 0;
 
     private void applyEdgeToEdge() {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
@@ -100,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             case C: setTheme(R.style.Theme_Notagus_FontC); break;
         }
     }
+
+    private int lastImeInset = 0;          // último inset de teclado
+    private static final int BASE_PAD_DP   = 52; // respiración base
+    private static final int SAFE_SLACK_DP = 8;  // “descuento” del solapado BNV/FAB
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -176,6 +162,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewTasks   = findViewById(R.id.recyclerViewTasks);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
 
+        // Guardamos padding inicial y permitimos empuje bajo el padding
+        rvBottomPaddingInitial = recyclerViewTasks.getPaddingBottom();
+        recyclerViewTasks.setClipToPadding(false);
+
         TextView emptyTitle    = findViewById(R.id.emptyTitle);
         TextView emptySubtitle = findViewById(R.id.emptySubtitle);
         if (emptyTitle    != null) emptyTitle.setTextColor(cols.textOnContent);
@@ -191,15 +181,8 @@ public class MainActivity extends AppCompatActivity {
         if (d != null) divider.setDrawable(d);
         recyclerViewTasks.addItemDecoration(divider);
 
-        // ===== ItemDecoration para espacio del último ítem (sin “saltos”) =====
-        final LastItemBottomOffset bottomOffset = new LastItemBottomOffset(dp(56));
-        recyclerViewTasks.addItemDecoration(bottomOffset);
-
-        // Recalcular una vez medidos FAB/BNV y ante futuros relayouts
-        View.OnLayoutChangeListener recalc = (v, a,b,c,d2, e,f,g,h) -> recomputeBottomSpace(bottomOffset);
-        if (bottomNav != null) bottomNav.addOnLayoutChangeListener(recalc);
-        if (fab != null)       fab.addOnLayoutChangeListener(recalc);
-        recyclerViewTasks.post(() -> recomputeBottomSpace(bottomOffset));
+        // Empuje dinámico por IME (teclado)
+        installImePusher();
 
         adapter = new TaskAdapter(
                 tasks,
@@ -236,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             int fabIcon = (ColorUtils.calculateLuminance(cols.header) < 0.5) ? 0xFFFFFFFF : 0xFF000000;
             fab.setImageTintList(android.content.res.ColorStateList.valueOf(fabIcon));
 
+            // Margen del FAB respetando nav bar
             ViewCompat.setOnApplyWindowInsetsListener(fab, (v, insets) -> {
                 int nav = insets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.navigationBars()).bottom;
                 ViewGroup.LayoutParams base = v.getLayoutParams();
@@ -432,6 +416,30 @@ public class MainActivity extends AppCompatActivity {
         NotagusWidgetProvider.requestRefresh(getApplicationContext());
     }
 
+    /** Empuja el RecyclerView con padding cuando aparece el IME (teclado). */
+    private void installImePusher() {
+        final View root = findViewById(android.R.id.content);
+
+        // Recalcular apenas haya layout inicial (para que ya haya “colchón” desde el arranque)
+        recyclerViewTasks.post(() -> recomputeListBottomPadding(0));
+
+        // Recalcular cada vez que cambie el tamaño del FAB o el BottomNav
+        if (fab != null) {
+            fab.addOnLayoutChangeListener((v,a,b,c,d,e,f,g,h) -> recomputeListBottomPadding(lastImeInset));
+        }
+        if (bottomNav != null) {
+            bottomNav.addOnLayoutChangeListener((v,a,b,c,d,e,f,g,h) -> recomputeListBottomPadding(lastImeInset));
+        }
+
+        // Escuchar insets (IME on/off) y recalcular
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+            final boolean imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime());
+            lastImeInset = imeVisible ? insets.getInsets(WindowInsetsCompat.Type.ime()).bottom : 0;
+            recomputeListBottomPadding(lastImeInset);
+            return insets; // no consumimos
+        });
+    }
+
     private void requestPostNotificationsIfNeeded() {
         if (Build.VERSION.SDK_INT >= 33) {
             if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
@@ -582,11 +590,24 @@ public class MainActivity extends AppCompatActivity {
         View bnv = findViewById(R.id.bottomNav);
         if (bnv != null) bnv.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
+    /** Calcula y aplica el padding inferior del RV considerando:
+     *  - padding original
+     *  - nav bar (ignora visibilidad)
+     *  - solapado potencial de FAB/BNV (con “slack”)
+     *  - base pad (respiración fija)
+     *  - IME (si está visible)
+     */
+    private void recomputeListBottomPadding(int imeBottom) {
+        if (recyclerViewTasks == null) return;
 
-    // Recalcula el espacio seguro del último ítem (BNV/FAB + insets + padding base)
-    private void recomputeBottomSpace(LastItemBottomOffset deco) {
-        int basePad = dp(36);
+        // Insets del sistema
+        int nav = 0;
+        WindowInsetsCompat rootInsets = ViewCompat.getRootWindowInsets(recyclerViewTasks);
+        if (rootInsets != null) {
+            nav = rootInsets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.navigationBars()).bottom;
+        }
 
+        // Alturas de BNV y FAB
         int bnvH = (bottomNav != null) ? bottomNav.getHeight() : 0;
 
         int fabH = (fab != null && fab.getHeight() > 0) ? fab.getHeight() : dp(62);
@@ -598,14 +619,23 @@ public class MainActivity extends AppCompatActivity {
         }
         int fabOverlap = fabRad + fabMb;
 
-        int extra = Math.max(bnvH, fabOverlap);
+        // Zona “segura” para que el último ítem no quede debajo de FAB/BNV
+        int safe = Math.max(bnvH, fabOverlap) - dp(SAFE_SLACK_DP);
+        if (safe < 0) safe = 0;
 
-        int nav = 0;
-        WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(recyclerViewTasks);
-        if (insets != null) {
-            nav = insets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.navigationBars()).bottom;
+        int basePad = dp(BASE_PAD_DP);
+
+        int newBottom = rvBottomPaddingInitial + basePad + nav + safe + imeBottom;
+
+        if (recyclerViewTasks.getPaddingBottom() != newBottom) {
+            recyclerViewTasks.setPadding(
+                    recyclerViewTasks.getPaddingLeft(),
+                    recyclerViewTasks.getPaddingTop(),
+                    recyclerViewTasks.getPaddingRight(),
+                    newBottom
+            );
         }
-        deco.setBottomPx(basePad + nav + extra);
-        recyclerViewTasks.invalidateItemDecorations();
     }
+
 }
+
